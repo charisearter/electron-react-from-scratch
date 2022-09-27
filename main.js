@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 
 let mainWindow;
@@ -49,3 +49,11 @@ app.on('activate', () => {
 });
 
 // IPC events
+
+// say Hello test
+
+ipcMain.handle('say-hello', (_, args) => {
+	console.log(args);
+	// will show in console window
+	return `Hi, from Main process. This is app version ${app.getVersion()}.`;
+});
