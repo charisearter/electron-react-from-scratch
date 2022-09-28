@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, Notification } = require('electron');
 const path = require('path');
 
 let mainWindow;
@@ -68,4 +68,11 @@ ipcMain.handle('say-hello', (_, args) => {
 // Send Message back
 ipcMain.on('message', (_, args) => {
 	console.log(`Message sent to Main: ${args}`);
+});
+
+// actual Notification pop-up
+
+ipcMain.on('notify', (_, message) => {
+	console.log(`Notification on Main process: ${message}`);
+	new Notification({ title: 'Notification Test', body: message }).show();
 });

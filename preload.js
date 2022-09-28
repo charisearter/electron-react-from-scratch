@@ -9,6 +9,12 @@ const API = {
 	// 	ipcRenderer.on('count', (_, args) => {
 	// 		callback(args);
 	// 	}),
+	notification: {
+		sendNotification(message) {
+			console.log(`Notify is working: Message is - ${message}`);
+			ipcRenderer.send('notify', message);
+		},
+	},
 };
 
 contextBridge.exposeInMainWorld('api', API);

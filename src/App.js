@@ -48,7 +48,17 @@ function App() {
 			<button onClick={sendMessage}> Send message to Main</button>
 
 			<hr />
-
+			<h2> Notification Message (nested api + create actual Notification)</h2>
+			<button
+				onClick={() => {
+					// result in console log window of Dev tools
+					api.notification.sendNotification('Custom notification message');
+				}}
+			>
+				Notify
+			</button>
+			<hr />
+			<p> Auto counter was here </p>
 			{/* <h2> Auto Counter </h2>
 			<h1> Count: {count}</h1> */}
 		</main>
