@@ -93,4 +93,4 @@ ipcMain.on('notify', (_, message) => {
 });
 
 // show Dialog test
-ipcMain.handle('dialog:openFile', handleFileOpen)
+ipcMain.handle('dialog:openFile', handleFileOpen);
