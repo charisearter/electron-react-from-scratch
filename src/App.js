@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 function App() {
 	const [msg, setMsg] = useState('This is the initial message');
-	const [count, setCount] = useState(0);
 
 	// say Hello - will appear in console where electron starts
 	const getGreeting = async () => {
@@ -21,11 +20,6 @@ function App() {
 		e.preventDefault();
 		setMsg(e.target.value);
 	};
-
-	// Auto counter Main --> Renderer
-	// window.api.onCount(data => {
-	// 	setCount(data);
-	// });
 
 	return (
 		<main>
@@ -57,10 +51,6 @@ function App() {
 			>
 				Notify
 			</button>
-			<hr />
-			<p> Auto counter was here </p>
-			{/* <h2> Auto Counter </h2>
-			<h1> Count: {count}</h1> */}
 		</main>
 	);
 }

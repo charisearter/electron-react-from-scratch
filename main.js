@@ -1,6 +1,9 @@
 const { app, BrowserWindow, ipcMain, Notification } = require('electron');
 const path = require('path');
 
+// Check if in Development mode
+const isDev = !app.isPackaged;
+
 let mainWindow;
 const createWindow = () => {
 	mainWindow = new BrowserWindow({
@@ -17,14 +20,6 @@ const createWindow = () => {
 	// Show window when finished loading
 	mainWindow.on('ready-to-show', mainWindow.show);
 
-	// Counter test Main --> renderer
-
-	// let count = 0;
-
-	// setInterval(() => {
-	// 	mainWindow.webContents.send('count', count++);
-	// }, 1000);
-
 	// open the Dev tools (possibly change to be conditional if in development mode)
 	mainWindow.webContents.openDevTools();
 
@@ -32,10 +27,13 @@ const createWindow = () => {
 	mainWindow.loadFile('index.html');
 };
 
-// auto reloads Electron when changes are made
-require('electron-reload')(__dirname, {
-	electron: path.join(__dirname, 'node_modules', '.bin', 'electron'),
-});
+// Only do Electron reload in Dev environment
+if (isDev) {
+	// auto reloads Electron when changes are made
+	require('electron-reload')(__dirname, {
+		electron: path.join(__dirname, 'node_modules', '.bin', 'electron'),
+	});
+}
 
 // called when Electron is finished initializing and ready to create browser windows
 app.whenReady().then(createWindow);
