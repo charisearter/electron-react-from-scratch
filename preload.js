@@ -11,7 +11,8 @@ const API = {
 			console.log(`Notify is working: Message is - ${message}`);
 			ipcRenderer.send('notify', message);
 		},
-	},
+  },
+  openFile: () => ipcRenderer.invoke('dialog:openFile')
 };
 
 contextBridge.exposeInMainWorld('api', API);

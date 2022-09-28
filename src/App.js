@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 function App() {
 	const [msg, setMsg] = useState('This is the initial message');
+	const [filePath, setFilePath] = useState([]);
 
 	// say Hello - will appear in console where electron starts
 	const getGreeting = async () => {
@@ -19,6 +20,13 @@ function App() {
 	const onMsgChange = e => {
 		e.preventDefault();
 		setMsg(e.target.value);
+	};
+
+	// Show Dialog - OPen a file
+
+	const fileOpen = async () => {
+		const thePath = await window.api.openFile();
+		setFilePath(thePath);
 	};
 
 	return (
@@ -51,6 +59,12 @@ function App() {
 			>
 				Notify
 			</button>
+			<hr />
+			<h2> Open a file and Show the path</h2>
+			<button onClick={fileOpen}>Open a file</button>
+			<p>
+				File path: <strong>{filePath}</strong>
+			</p>
 		</main>
 	);
 }

@@ -1,8 +1,25 @@
-const { app, BrowserWindow, ipcMain, Notification } = require('electron');
+const {
+	app,
+	BrowserWindow,
+	ipcMain,
+	Notification,
+	dialog,
+} = require('electron');
 const path = require('path');
 
 // Check if in Development mode
 const isDev = !app.isPackaged;
+
+// Show Dialog Test
+
+const handleFileOpen = async () => {
+	const { canceled, filePaths } = await dialog.showOpenDialog();
+	if (canceled) {
+		return;
+	} else {
+		return filePaths[0];
+	}
+};
 
 let mainWindow;
 const createWindow = () => {
@@ -74,3 +91,6 @@ ipcMain.on('notify', (_, message) => {
 	console.log(`Notification on Main process: ${message}`);
 	new Notification({ title: 'Notification Test', body: message }).show();
 });
+
+// show Dialog test
+ipcMain.handle('dialog:openFile', handleFileOpen)
